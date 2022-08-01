@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card class="btn-movie" button *ngFor="let item of movies" [routerLink]="[item.id]">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="imageBaseUrl + '/w92' + item.poster_path">
+        </ion-avatar>
+        <label class="lbl-title"> {{ item.title }} 
+          <!-- <p> {{ item.overview }} </p> -->
+        </label>
+        <ion-badge color="danger" slot="end"> {{ item.vote_average }} </ion-badge>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" >
+    <ion-infinite-scroll-content 
+    loadingSpinner="bubbles" 
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
